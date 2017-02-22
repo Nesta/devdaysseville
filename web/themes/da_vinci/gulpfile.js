@@ -153,6 +153,20 @@ gulp.task('sasslint', function () {
   .pipe(sassLint.failOnError());
 });
 
+// Sass lint Reports
+gulp.task('sasslintReports', function () {
+  return gulp.src(srcAssets.styles + '**/*.s+(a|c)ss')
+  .pipe(sassLint({
+    options: {
+      configFile: 'da_vinci.sass-lint.yml',
+      formatter: 'checkstyle',
+     'output-file': 'sasslintResult.xml'
+    }
+  }))
+  .pipe(sassLint.format())
+  .pipe(sassLint.failOnError());
+});
+
 // jsHint
 gulp.task('jshint', function(){
   return gulp.src([distAssets.js + '**/*.js'])
